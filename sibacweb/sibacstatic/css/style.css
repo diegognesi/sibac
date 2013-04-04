@@ -1,0 +1,338 @@
+html, body, #pageheader, #pageheader h1, #pageheader h2, #logindiv, #logindiv p {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #f8f8f8;
+}
+
+.appdialog {
+    font-size: 0.8em;
+}
+
+.spinner {
+    padding-left: 30px;
+    background: url("images/spinner.gif") no-repeat center left;
+}
+
+.hidden {
+    display: none;
+}
+
+a, a:visited {
+    color: #64854c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #80aa61;
+}
+
+#logindiv {
+    padding: 5px;
+    background-color: #534e44;
+    color: #FFFFFF;
+    font-size: 0.8em;
+}
+
+#logindiv a{
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+#pageheader {
+    padding: 30px;
+}
+
+#pageheader h1, #pageheader h2 {
+    color: #534e44;
+    font-family: "Helvetica Neue",Arial,Sans-Serif;
+    font-weight: 400;
+}
+
+#pageheader h1 {
+    font-size:2em;
+}
+
+#pageheader h2 {
+    font-size:0.9em;
+}
+
+
+/* ## Menu Section. See tutorial http://www.ourtuts.com/create-a-drop-down-navigation-menu-with-html5-and-css3/ ## */
+
+#mainmenu {
+    width: 100%;
+    padding: 0px;
+    margin:0px auto;
+    /*position:relative;*/
+    display: inline-block;
+    float:left;
+    background-color: #96b97d;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+}
+ 
+#mainmenu li {
+    display:inline;
+    font-size:12px;
+    font-weight:bold;
+    margin:0px;
+    float:left;
+    position:relative;
+}
+
+#mainmenu li a {
+
+    padding:10px 25px;
+    color:#FFFFFF;
+    text-decoration:none;
+    display:inline-block;
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+     
+    -webkit-transition:color 0.2s linear, background 0.0s linear;  
+    -moz-transition:color 0.2s linear, background 0.2s linear; 
+    -o-transition:color 0.2s linear, background 0.2s linear;   
+    transition:color 0.2s linear, background 0.2s linear;
+}
+
+#mainmenu li a.dropdown {
+    background:url("images/dropdownarrow.png") no-repeat center right;
+}
+
+#mainmenu li a.dropright {
+    background:url("images/b_droprightarrow.png") no-repeat center right;
+}
+
+#mainmenu li a:hover {
+    background-color:#b4df96;
+    color: #FFFFFF;
+}
+
+#mainmenu li a.dropright:hover {
+    background: url("images/w_droprightarrow.png") no-repeat center right #639142;
+}
+
+#mainmenu li:hover > a {
+    background-color:#639142;
+}
+
+/* Drop-Down Navigation */
+#mainmenu li:hover > ul
+{
+    visibility:visible;
+    opacity:1;
+}
+ 
+#mainmenu ul, #mainmenu ul li ul {
+    background-color: #f8f8f8;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;   
+    visibility:hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 99999;
+    width:180px;
+    box-shadow:1px 1px 3px #101010;
+    -webkit-transition:visibility 0.2s linear, opacity 0.2s linear;
+    -moz-transition:visibility 0.2s linear, opacity 0.2s linear;
+    -o-transition:visibility 0.2s linear, opacity 0.2s linear;
+    transition:visibility 0.2s linear, opacity 0.2s linear;
+}
+ 
+#mainmenu ul {
+    margin:0px;
+    padding:0px;
+    top: 36px;
+    left: 1px;
+}
+ 
+#mainmenu ul li ul {
+    top: 0px;
+    left: 181px;
+}
+ 
+#mainmenu ul li {
+    clear:both;
+    width:100%;
+    border:0 none;
+}
+ 
+#mainmenu ul li a {
+    background:none;
+    padding:7px 15px;
+    color:#616161;
+    text-decoration:none;
+    display:inline-block;
+    border:0px none;
+    float:left;
+    clear:both;
+    width:150px;
+}
+
+#pagecontent {
+    margin: 0px;
+    padding: 15px 15px 30px 15px;
+    background-repeat: no-repeat;
+}
+
+#contentwindow {
+    background-color:#ffffff;
+    padding:10px 20px;
+    margin: 50px 20px 0px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px; 
+    -o-border-radius: 10px;
+}
+
+#contentwindow {
+    font-size: 0.8em;
+}
+
+#contentwindow img{
+    border: 10px solid #e9e9e9;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+#contentwindow h1, #contentwindow h2, #contentwindow h3
+{
+    color: #64854c;
+}
+
+#contentwindow h1 {
+    font-size: 1.7em;
+}
+
+#contentwindow h2 {
+    font-size: 1.3em;
+}
+
+#contentwindow h3 {
+    font-size: 1.1em;
+}
+
+#contentwindow label.formlabel {
+    display:block;
+    margin-top:15px;
+}
+
+#contentwindow .buttons {
+    margin-top:15px;
+}
+
+#contentwindow input[type=text],
+#contentwindow input[type=password],
+#contentwindow textarea
+{
+    font-size: 0.9em;
+    padding: 4px;
+    outline: none;
+    border: 1px solid #2c4918;
+    background: -webkit-gradient(linear, left top, left bottombottom, from(#eeeeee), to(#ffffff));
+    background: -webkit-linear-gradient(top,  #eeeeee,  #ffffff);
+    background: -moz-linear-gradient(top,  #eeeeee,  #ffffff);
+    background: linear-gradient(top,  #eeeeee,  #ffffff);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 0px #efefef;
+    -moz-box-shadow: 1px 1px 0px #efefef;
+    box-shadow:  1px 1px 0px #efefef;
+}
+
+#contentwindow ul.error {
+    display: inline-block;
+    margin: 0px;
+    padding: 10px 10px 10px 30px;
+    color: #cd0a0a;
+    border: 1px solid #cd0a0a;
+    background-color: #f7e5e5;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#contentwindow ul.error li {
+    list-style-image: url("images/error.png");
+}
+
+#contentwindow table {
+    border-collapse: collapse;
+}
+
+#contentwindow table th {
+    border: 1px solid #2c4918;
+    background-color: #64854c;
+    color: #ffffff;
+    padding: 5px;
+}
+
+#contentwindow table td {
+    border: 1px solid #2c4918;
+    padding: 5px;
+}
+
+#contentwindow table .even {
+    background-color: #ffffff;
+}
+
+#contentwindow table .odd {
+
+}
+
+#contentwindow table a, #contentwindow table a:visited {
+    color: #64854c;
+    text-decoration: underline;
+}
+
+#contentwindow table a:hover {
+    color: #80aa61;
+}
+
+#contentwindow .toolbar {
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+
+#pagefooter {
+    font-size: 0.7em;
+    margin: 0px;
+    padding: 1px 0px 1px 30px;
+    color: #FFFFFF;
+    background-color: #534e44;
+}
+
+#pagefooter a{
+    color: #ffffff;
+    text-decoration:underline;
+}
+
+.appdialog h1, .appdialog h2, .appdialog h3
+{
+    color: #64854c;
+}
+
+.appdialog h1 {
+    font-size: 1.7em;
+}
+
+.appdialog h2 {
+    font-size: 1.3em;
+}
+
+.appdialog h3 {
+    font-size: 1.1em;
+}

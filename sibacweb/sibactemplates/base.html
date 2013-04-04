@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ WebAppSettings.title }}</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="{{ SITE_KEYWORDS }}">
+    <meta name="description" content="{{ SITE_DESCRIPTION }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/jquery/jquery-ui-1.9.2.custom.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/jquery/jquery.qtip.min.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery/jquery-ui-1.9.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery/jquery.validate.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/customize-ui.js"></script>
+    {% block extrascripts %}
+    {% endblock %}
+  </head>
+  <body>
+    <div id="logindiv">
+      <img src="{{ STATIC_URL }}icons/key.png" alt="Accedi" title="Accedi"/>
+      {% if user.is_authenticated %}
+        Benvenuto, {{ user.username }}. <a href="/user/change_password">Cambia password</a>. <a href="/user/logout">Logout</a>.
+      {% else %}
+        Utente non autenticato. <a href="/user/login">Login</a>. <a href="/user/register">Registrati</a>.
+      {% endif %}
+    </div>
+    <header id="pageheader">
+      <hdgroup id="titlegroup">
+        <h1>{{ WebAppSettings.title }}</h1>
+        <h2>{{ WebAppSettings.subtitle }}</h2>
+      </hdgroup>
+    </header>
+    <nav>
+      <ul id="mainmenu">
+        <li class="current"><a class="first" href="/">Home</a></li>
+        <li>
+          <a class="dropdown" href="#">Admin</a>
+          <ul>
+            <li><a href="/settings">Impostazioni</a></li>
+            <li><a href="#">Gestione utenti</a></li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown" href="#">Documenti</a>
+          <ul>
+            <li><a href="#">Ricerca semplice</a></li>
+            <li><a href="#">Ricerca avanzata</a></li>
+            <li><a href="#">Crea nuovo</a></li>
+            <li>
+              <a class="dropright" href="#">Importa</a>
+              <ul>
+                <li><a href="#">Importa pacchetto</a></li>
+                <li><a href="#">Importa schede</a></li>
+                <li><a href="#">Importa allegati</a></li>
+                <li><a href="#">Importa geometrie</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Esporta</a>
+              <ul>
+                <li><a href="#">Esporta pacchetto</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contacts">Contatti</a></li>
+        <li><a class="last" href="/links">Link</a></li>
+      </ul>
+    </nav>
+    <div id="pagecontent">
+      {% block content %}
+        <div id="contentwindow">
+          <h1>Titolo1</h1>
+          <p>Some content.</p>
+          <h2>Titolo2</h2>
+          <p>Some content. Link style samlple: <a href="#">Sito web</a>.<br/>
+          Some content.<br/></p>
+          <h3>Titolo3</h3>
+          <p>Some content.<br/>
+          Some content.</p>
+        </div>
+      {% endblock %}
+    </div>
+    <footer id="pagefooter">
+      <p>Powered by <a href="#">Sibac</a>.<br/>
+      {{ WebAppSettings.copyright }}</p>
+    </footer>
+  </body>
+</html>

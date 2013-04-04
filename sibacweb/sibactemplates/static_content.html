@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extrascripts %}
+<script src="{{ STATIC_URL }}scripts/ckeditor/ckeditor.js"></script>
+<script src="{{ STATIC_URL }}scripts/pages/static_content.js"></script>
+{% endblock %}
+{% block content %}
+<div id="contentwindow" contenteditable="true">
+  {% if page_content %}
+    {{ page_content|safe }}
+  {% else %}
+    <h2>Contenuti da inserire</h2>
+    <p>
+    Se hai eseguito il login come amministratore, per modificare i contenuti delle pagine Home, About, Contatti e Link
+    sarà sufficiente cliccare su questo riquadro, eseguire le modifiche e premere il pulsante Salva.
+    </p>
+  {% endif %}
+</div>
+{% endblock %}

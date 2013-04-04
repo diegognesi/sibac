@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block extrascripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/permissions.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/pages/settings.js"></script>
+{% endblock %}
+{% block content %}
+<div id="contentwindow">
+  <h1>Impostazioni</h1>
+  <div class="toolbar">
+    <button id="save_settings">Salva</button>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="#tab-general">Generali</a></li>
+      <li><a href="#tab-email">Posta</a></li>
+      <li><a href="#tab-security">Sicurezza</a></li>
+    </ul>
+    <div id="tab-general">
+      <h2>Impostazioni generali</h2>
+      <label class="formlabel" for="site-title">Titolo sito:</label>
+      <input type="text" id="site-title" name="site-title" style="width:250px" autofocus="autofocus" value="{{ WebAppSettings.title|default:'' }}" />
+      <label class="formlabel" for="site-subtitle">Sottotitolo sito:</label>
+      <input type="text" id="site-subtitle" name="site-subtitle" style="width:300px" value="{{ WebAppSettings.subtitle|default:'' }}" />
+      <label class="formlabel" for="site-url">URL:</label>
+      <input type="text" id="site-url" name="site-url" style="width:300px" value="{{ WebAppSettings.url|default:'' }}" />
+      <label class="formlabel" for="site-description">Descrizione (per i motori di ricerca):</label>
+      <textarea id="site-description" name="site-description" cols="50" rows="3">{{ WebAppSettings.description|default:"" }}</textarea>
+      <label class="formlabel" for="site-keywords">Parole chiave (separate da uno spazio):</label>
+      <textarea id="site-keywords" name="site-keywords" cols="50" rows="3">{{ WebAppSettings.keywords|default:"" }}</textarea>
+    </div>
+    <div id="tab-email">
+      <h2>Servizi di posta</h2>
+      <p>Configurare il sistema di gestione della posta per consentire l'invio di e-mail
+         agli utenti e la verifica dell'identità degli utenti in fase di registrazione</p>
+      <label class="formlabel" for="email-email-from">Indirizzo e-mail:</label>
+      <input type="text" id="email-email-from" value="{{ WebAppSettings.email.email_from|default:'' }}"/>
+      <label class="formlabel" for="email-username">Nome utente:</label>
+      <input type="text" id="email-username" value="{{ WebAppSettings.email.username|default:'' }}"/>
+      <label class="formlabel" for="email-password">Password:</label>
+      <input type="password" id="email-password" value="{{ WebAppSettings.email.password|default:'' }}"/>
+      <label class="formlabel" for="email-host">Host:</label>
+      <input type="text" id="email-host" value="{{ WebAppSettings.email.host|default:'' }}"/>
+      <label class="formlabel" for="email-port">Porta:</label>
+      <input type="text" id="email-port" value="{{ WebAppSettings.email.port|default:'' }}"/>
+      <label class="formlabel" for="email-use-tls">Usa tls (ssl):</label>
+      <input type="checkbox" id="email-use-tls" {% if WebAppSettings.email.use_tls %}checked="checked"{% endif %}/>
+    </div>
+    <div id="tab-security">
+      <h2>Iscrizione al sito</h2>
+      <input type="radio" name="registration_mode" id="register_self" value="SELF" {% ifequal WebAppSettings.app_permissions.registration_mode "SELF" %}checked="checked"{% endifequal %}/>
+      <label for="register_self">I nuovi utenti possono iscriversi autonomamente.</label><br/>
+      <input type="radio" name="registration_mode" id="register_self_with_email" value="SELF_WITH_EMAIL" {% ifequal WebAppSettings.app_permissions.registration_mode "SELF_WITH_EMAIL" %}checked="checked"{% endifequal %}/>
+      <label for="register_self_with_email">I nuovi utenti possono iscriversi autonomamente, con conferma via e-mail.</label><br/>
+      <input type="radio" name="registration_mode" id="register_only_admins" value="BY_ADMINS" {% ifequal WebAppSettings.app_permissions.registration_mode "BY_ADMINS" %}checked="checked"{% endifequal %}/>
+      <label for="register_only_admins">Solo gli amministratori possono iscrivere nuovi utenti.</label>
+      <h2>Permessi sui contenuti</h2>
+      <table id="permissions-table">
+        <thead>
+          <tr>
+            <th>Tipo di documento</th>
+            <th>Attivo</th>
+            <th>Permessi in lettura</th>
+            <th>Filigrana su allegati</th>
+            <th>Permessi in scrittura</th>
+            <th>Paragrafi visualizzati</th>
+            <th>Espressione di default</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for dt_key, dt_val in WebAppSettings.app_permissions.permissions.iteritems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td name="dt-sid">{{ dt_key }}</td>
+            <td>
+              <input type="checkbox" name="is-active" {% if dt_val.is_active %}checked="checked"{% endif %}/>
+            </td>
+            <td>
+              <select name="dt-access-level">
+                <option value="PUBLIC" {% ifequal dt_val.access_level "PUBLIC" %}selected="selected"{% endifequal %}>Tutti</option>
+                <option value="REGISTERED" {% ifequal dt_val.access_level "REGISTERED" %}selected="selected"{% endifequal %}>Utenti registrati</option>
+                <option value="EXPLICIT" {% ifequal dt_val.access_level "EXPLICIT" %}selected="selected"{% endifequal %}>Permessi espliciti</option>
+              </select>
+            </td>
+            <td><input type="checkbox" name="watermark-by-default" {% if dt.watermark_by_default %}checked="checked"{% endif %}/></td>
+            <td>
+              <select name="dt-w-access-level">
+                <option value="PUBLIC" {% ifequal dt_val.w_access_level "PUBLIC" %}selected="selected"{% endifequal %}>Tutti</option>
+                <option value="REGISTERED" {% ifequal dt_val.w_access_level "REGISTERED" %}selected="selected"{% endifequal %}>Utenti registrati</option>
+                <option value="EXPLICIT" {% ifequal dt_val.w_access_level "EXPLICIT" %}selected="selected"{% endifequal %}>Permessi espliciti</option>
+              </select>
+            </td>
+            <td>
+              <a href="" name="visible-paragraphs" data-paragraphs="{{ dt_val.visible_paragraphs|join:',' }}">{% ifequal dt_val.visible_paragraphs_abbr_string "*" %}Tutti{% else %}{{ dt_val.visible_paragraphs_abbr_string }}{% endifequal %}</a>
+            </td>
+            <td>
+              <a href="" name="default-expression" data-expression="{{ dt_val.default_expression }}">{% ifequal dt_val.default_expression_abbr_string "None" %}Non impostata{% else %}{{ dt_val.default_expression_abbr_string }}{% endifequal %}</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

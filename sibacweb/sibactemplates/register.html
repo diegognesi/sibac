@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block extrascripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/pages/register.js"></script>
+{% endblock %}
+{% block content %}
+<div id="contentwindow">
+  <h1>Registrazione utente</h1>
+    {% if error_message %}
+      <ul class="error">
+        <li>{{ error_message }}</li>
+      </ul>
+    {% endif %}
+    <form id="registerform" action="" method="POST">
+      {% csrf_token %}
+      <label class="formlabel" for="name">Nome:</label>
+      <input type="text" class="textbox" name="name" id="name" value=""/>
+      <label class="formlabel" for="surname">Cognome:</label>
+      <input type="text" class="textbox" name="surname" id="surname" value=""/>
+      <label class="formlabel" for="email">E-mail:</label>
+      <input type="text" class="textbox" name="email" id="email" value=""/>
+      <label class="formlabel" for="username">Nome utente:</label>
+      <input type="text" class="textbox" name="username" id="username" value=""/>
+      <label class="formlabel" for="password">Password:</label>
+      <input type="password" name="password" id="password" value=""/>
+      <label class="formlabel" for="passwordrepeat">Ripeti password:</label>
+      <input type="password" name="passwordrepeat" id="passwordrepeat" value=""/>
+      <div class="buttons">
+        <input type="submit" class="button" value="Login"/>
+      </div>
+    </form>
+</div>
+{% endblock %}
